@@ -45,6 +45,8 @@ export async function PUT(request, { params }) {
             data: updatedJobData,
         });
 
+        console.log('Updated job:', updatedJob);
+
         return NextResponse.json(updatedJob);
     } catch (error) {
         console.error('Error updating job:', error);

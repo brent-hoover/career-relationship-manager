@@ -8,17 +8,18 @@ datasource db {
 }
 
 model Job {
-  id          Int       @id @default(autoincrement())
-  position    String
-  company     String
-  maxSalary   Int
-  location    String
-  status      String
-  dateSaved   DateTime
-  deadline    DateTime?
-  dateApplied DateTime?
-  followUp    DateTime?
-  excitement  Float
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id            Int       @id @default(autoincrement())
+  position      String
+  company       String
+  maxSalary     Int
+  location      String
+  status        String
+  dateSaved     DateTime
+  deadline      DateTime?
+  dateApplied   DateTime?
+  followUp      DateTime?
+  excitement    Float
+  jobListingUrl String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }

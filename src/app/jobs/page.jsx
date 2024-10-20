@@ -10,6 +10,13 @@ const formatDate = (date) => {
     return date ? format(new Date(date), 'MM/dd/yyyy') : 'N/A';
 };
 
+const formatUrl = (url) => {
+    if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+        return `https://${url}`;
+    }
+    return url;
+};
+
 const renderStars = (excitement) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -57,6 +64,7 @@ export default async function JobListingPage() {
                         <th className="py-2 px-4 text-left">Deadline</th>
                         <th className="py-2 px-4 text-left">Date Applied</th>
                         <th className="py-2 px-4 text-left">Follow Up</th>
+                        <th className="py-2 px-4 text-left">Job Listing URL</th>
                         <th className="py-2 px-4 text-left">Excitement</th>
                     </tr>
                     </thead>
@@ -83,12 +91,26 @@ export default async function JobListingPage() {
                             <td className="py-2 px-4">{formatDate(job.deadline)}</td>
                             <td className="py-2 px-4">{formatDate(job.dateApplied)}</td>
                             <td className="py-2 px-4">{formatDate(job.followUp)}</td>
-                            <td className="py-2 px-4">{renderStars(job.excitement)}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                            <td className="py-2 px-4">
+                                {job.jobListingUrl ? (
+                                    <a
+                                        href={formatUrl(job.jobListingUrl)}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-500 hover:underline"
+                                    >
+                                        View Listing
+                                    </a>
+                                ) : (
+                                    'N/A'
+                                )}
+                            </td>
+                                    <td className="py-2 px-4">{renderStars(job.excitement)}</td>
+                                    </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                        </div>
+                        </div>
     );
 }

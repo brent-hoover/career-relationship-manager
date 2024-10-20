@@ -138,6 +138,7 @@ const JobDetailEdit = ({ job: initialJob }) => {
                 {renderEditableField('deadline', 'Deadline', 'date')}
                 {renderEditableField('dateApplied', 'Date Applied', 'date')}
                 {renderEditableField('followUp', 'Follow Up', 'date')}
+                {renderEditableField('jobListingUrl', 'Job Listing URL', 'url')}
                 <div className="flex items-center py-2 border-b">
                     <span className="font-semibold w-1/3">Excitement:</span>
                     <div className="w-2/3 flex items-center">

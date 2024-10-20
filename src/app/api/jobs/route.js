@@ -34,6 +34,7 @@ export async function POST(request) {
         jobData.dateApplied = jobData.dateApplied ? new Date(jobData.dateApplied) : null;
         jobData.followUp = jobData.followUp ? new Date(jobData.followUp) : null;
 
+
         // Ensure numeric fields are properly converted
         jobData.maxSalary = parseInt(jobData.maxSalary, 10);
         jobData.excitement = parseFloat(jobData.excitement);

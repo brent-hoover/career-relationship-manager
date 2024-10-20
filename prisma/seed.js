@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -13,6 +14,7 @@ async function main() {
             deadline: new Date("2024-11-30"),
             dateApplied: new Date("2024-10-20"),
             followUp: new Date("2024-11-05"),
+            jobListingUrl: "https://www.techcorp.com/job-listing/senior-software-engineer",
             excitement: 4
         },
         {
@@ -25,6 +27,7 @@ async function main() {
             deadline: new Date("2024-12-15"),
             dateApplied: new Date("2024-10-18"),
             followUp: new Date("2024-11-01"),
+            jobListingUrl: "https://www.aiinnovations.com/job-listing/senior-data-scientist",
             excitement: 5
         },
         // Add more sample jobs as needed

@@ -171,6 +171,18 @@ const NewJobForm = () => {
                 />
             </div>
             <div>
+                <label htmlFor="jobListingUrl" className="block mb-1">Job Listing URL:</label>
+                <input
+                    type="url"
+                    id="jobListingUrl"
+                    name="jobListingUrl"
+                    value={job.jobListingUrl}
+                    onChange={handleChange}
+                    className="w-full border rounded p-2"
+                    placeholder="https://example.com/job-listing"
+                />
+             </div>
+            <div>
                 <label htmlFor="excitement" className="block mb-1">Excitement (1-5):</label>
                 <input
                     type="number"
