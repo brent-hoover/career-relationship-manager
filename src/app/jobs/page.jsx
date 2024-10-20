@@ -1,14 +1,10 @@
+import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { Star, StarHalf } from 'lucide-react';
+import DeleteJobs from './DeleteJobs'; // We'll create this client component
 
-async function getJobs() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs`, { cache: 'no-store' });
-    if (!res.ok) {
-        throw new Error('Failed to fetch jobs');
-    }
-    return res.json();
-}
+const prisma = new PrismaClient();
 
 const formatDate = (date) => {
     return date ? format(new Date(date), 'MM/dd/yyyy') : 'N/A';
@@ -28,16 +24,30 @@ const renderStars = (excitement) => {
     return stars;
 };
 
+async function getJobs() {
+    const jobs = await prisma.job.findMany();
+    return jobs;
+}
+
 export default async function JobListingPage() {
     const jobs = await getJobs();
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">My Job Applications</h1>
+            <div className="flex justify-between items-center mb-4">
+                <h1 className="text-2xl font-bold">My Job Applications</h1>
+                <div>
+                    <Link href="/jobs/new" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2">
+                        Add New Job
+                    </Link>
+                    <DeleteJobs jobs={jobs} />
+                </div>
+            </div>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white">
                     <thead className="bg-gray-100">
                     <tr>
+                        <th className="py-2 px-4 text-left">Select</th>
                         <th className="py-2 px-4 text-left">Position</th>
                         <th className="py-2 px-4 text-left">Company</th>
                         <th className="py-2 px-4 text-left">Max Salary</th>
@@ -53,6 +63,13 @@ export default async function JobListingPage() {
                     <tbody>
                     {jobs.map((job) => (
                         <tr key={job.id} className="border-b hover:bg-gray-50">
+                            <td className="py-2 px-4">
+                                <input
+                                    type="checkbox"
+                                    name={`job-${job.id}`}
+                                    className="form-checkbox h-5 w-5 text-blue-600"
+                                />
+                            </td>
                             <td className="py-2 px-4">
                                 <Link href={`/jobs/${job.id}`} className="text-blue-500 hover:underline">
                                     {job.position}

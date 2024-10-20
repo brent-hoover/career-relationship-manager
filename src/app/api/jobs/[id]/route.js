@@ -18,15 +18,37 @@ export async function GET(request, { params }) {
         });
 
         if (!job) {
-            console.log('Job not found for ID:', id);
             return NextResponse.json({ error: 'Job not found' }, { status: 404 });
         }
-
-        console.log('Job found:', job);
         return NextResponse.json(job);
     } catch (error) {
         console.error('Error in API route:', error);
         return NextResponse.json({ error: 'Error fetching job' }, { status: 500 });
+    } finally {
+        await prisma.$disconnect();
+    }
+}
+
+
+
+export async function PUT(request, { params }) {
+    try {
+        const id = parseInt(params.id);
+        if (isNaN(id)) {
+            return NextResponse.json({ error: 'Invalid job ID' }, { status: 400 });
+        }
+
+        const updatedJobData = await request.json();
+
+        const updatedJob = await prisma.job.update({
+            where: { id: id },
+            data: updatedJobData,
+        });
+
+        return NextResponse.json(updatedJob);
+    } catch (error) {
+        console.error('Error updating job:', error);
+        return NextResponse.json({ error: 'Error updating job' }, { status: 500 });
     } finally {
         await prisma.$disconnect();
     }

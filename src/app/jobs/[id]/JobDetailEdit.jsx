@@ -5,13 +5,13 @@ import { format } from 'date-fns';
 import { Star, StarHalf, Edit2, Check, X } from 'lucide-react';
 import Link from 'next/link';
 
-const JobDetailEdit = ({ job }) => {
-    const [editedJob, setEditedJob] = useState(job);
+const JobDetailEdit = ({ job: initialJob }) => {
+    const [job, setJob] = useState(initialJob);
     const [editingField, setEditingField] = useState(null);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setEditedJob({ ...editedJob, [name]: value });
+        setJob({ ...job, [name]: value });
     };
 
     const handleEditField = (fieldName) => {
@@ -19,19 +19,36 @@ const JobDetailEdit = ({ job }) => {
     };
 
     const handleSaveField = async (fieldName) => {
-        console.log(`Updating job field ${fieldName}:`, editedJob[fieldName]);
-        await new Promise(resolve => setTimeout(resolve, 500));
-        setEditingField(null);
+        try {
+            const response = await fetch(`/api/jobs/${job.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ [fieldName]: job[fieldName] }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update job');
+            }
+
+            const updatedJob = await response.json();
+            setJob(updatedJob);
+            setEditingField(null);
+        } catch (error) {
+            console.error('Error updating job:', error);
+            // Handle error (e.g., show error message to user)
+        }
     };
 
     const handleCancelEdit = (fieldName) => {
-        setEditedJob({ ...editedJob, [fieldName]: job[fieldName] });
+        setJob({ ...job, [fieldName]: initialJob[fieldName] });
         setEditingField(null);
     };
 
     const renderEditableField = (fieldName, label, type = 'text') => {
         const isEditing = editingField === fieldName;
-        let fieldValue = editedJob[fieldName];
+        let fieldValue = job[fieldName];
 
         if (type === 'date' && fieldValue) {
             fieldValue = format(new Date(fieldValue), 'yyyy-MM-dd');
@@ -129,7 +146,7 @@ const JobDetailEdit = ({ job }) => {
                                 <input
                                     type="number"
                                     name="excitement"
-                                    value={editedJob.excitement}
+                                    value={job.excitement}
                                     onChange={handleInputChange}
                                     min="1"
                                     max="5"
@@ -145,7 +162,7 @@ const JobDetailEdit = ({ job }) => {
                             </>
                         ) : (
                             <>
-                                {renderStars(editedJob.excitement)}
+                                {renderStars(job.excitement)}
                                 <button onClick={() => handleEditField('excitement')} className="text-blue-500 ml-2">
                                     <Edit2 size={20} />
                                 </button>
