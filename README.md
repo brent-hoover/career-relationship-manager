@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Job Application Tracker
+
+## Overview
+
+Job Application Tracker is a web application built with Next.js that helps you manage and track your job applications. It allows you to add, view, edit, and delete job applications, making it easier to stay organized during your job search.
+
+## Features
+
+- View a list of all job applications
+- Add new job applications
+- Edit existing job application details
+- Delete job applications
+- Track important information such as company, position, salary, application status, and important dates
+
+## Tech Stack
+
+- Next.js 13+ (App Router)
+- React
+- Prisma (ORM)
+- SQLite (Database)
+- Tailwind CSS (Styling)
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Node.js (v14 or later)
+- npm (usually comes with Node.js)
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to set up the project locally:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/job-application-tracker.git
+   cd job-application-tracker
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up the database:
+    - The project uses SQLite, so no additional database setup is required.
+    - Initialize Prisma and generate the client:
+      ```
+      npx prisma generate
+      ```
+    - Run the initial migration:
+      ```
+      npx prisma migrate dev --name init
+      ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. (Optional) Seed the database with sample data:
+   ```
+   npm run db:seed
+   ```
 
-## Learn More
+5. Start the development server:
+   ```
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+6. Open your browser and navigate to `http://localhost:3000` to view the application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- To add a new job application, click on the "Add New Job" button and fill out the form.
+- To view or edit a job application, click on the job title in the list.
+- To delete job applications, select the checkboxes next to the jobs you want to remove and click the "Delete Selected" button.
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License.
