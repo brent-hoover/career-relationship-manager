@@ -3,6 +3,7 @@
 ## Overview
 
 Job Application Tracker is a web application built with Next.js that helps you manage and track your job applications. It allows you to add, view, edit, and delete job applications, making it easier to stay organized during your job search.
+ Could you do this in a Google Sheet as well. Sure, but where's the fun in that?
 
 ## Features
 
@@ -32,8 +33,8 @@ Follow these steps to set up the project locally:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/job-application-tracker.git
-   cd job-application-tracker
+   git clone https://github.com/your-username/job-tracker-nextjs.git
+   cd job-tracker-nextjs
    ```
 
 2. Install dependencies:
