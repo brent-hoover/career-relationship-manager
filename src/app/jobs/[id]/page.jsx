@@ -1,25 +1,30 @@
 import JobDetailEdit from './JobDetailEdit';
 
-const jobs = [
-    {
-        position: "Senior Software Engineer",
-        company: "TechCorp",
-        maxSalary: 150000,
-        location: "USA",
-        status: "Applied",
-        dateSaved: "2024-10-15",
-        deadline: "2024-11-30",
-        dateApplied: "2024-10-20",
-        followUp: "2024-11-05",
-        excitement: 4
-    },
-    // ... other job objects (include all the jobs from your original data)
-];
+async function getJob(id) {
+    console.log('Fetching job with ID:', id);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs/${id}`, { cache: 'no-store' });
+    console.log('Fetch response status:', res.status);
+    if (!res.ok) {
+        console.error('Failed to fetch job:', await res.text());
+        throw new Error('Failed to fetch job');
+    }
+    const data = await res.json();
+    console.log('Fetched job data:', data);
+    return data;
+}
 
-export default function JobDetailPage({ params }) {
-    const job = jobs[params.id];
+export default async function JobDetailPage({ params }) {
+    console.log('Rendering JobDetailPage with params:', params);
+    let job;
+    try {
+        job = await getJob(params.id);
+    } catch (error) {
+        console.error('Error in JobDetailPage:', error);
+        return <div>Error: {error.message}</div>;
+    }
 
     if (!job) {
+        console.log('Job not found for ID:', params.id);
         return <div>Job not found</div>;
     }
 

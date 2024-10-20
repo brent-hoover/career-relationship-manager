@@ -2,21 +2,13 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { Star, StarHalf } from 'lucide-react';
 
-const jobs = [
-    {
-        position: "Senior Software Engineer",
-        company: "TechCorp",
-        maxSalary: 150000,
-        location: "USA",
-        status: "Applied",
-        dateSaved: "2024-10-15",
-        deadline: "2024-11-30",
-        dateApplied: "2024-10-20",
-        followUp: "2024-11-05",
-        excitement: 4
-    },
-    // ... other job objects (include all the jobs from your original data)
-];
+async function getJobs() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jobs`, { cache: 'no-store' });
+    if (!res.ok) {
+        throw new Error('Failed to fetch jobs');
+    }
+    return res.json();
+}
 
 const formatDate = (date) => {
     return date ? format(new Date(date), 'MM/dd/yyyy') : 'N/A';
@@ -36,7 +28,9 @@ const renderStars = (excitement) => {
     return stars;
 };
 
-export default function JobListingPage() {
+export default async function JobListingPage() {
+    const jobs = await getJobs();
+
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">My Job Applications</h1>
@@ -57,10 +51,10 @@ export default function JobListingPage() {
                     </tr>
                     </thead>
                     <tbody>
-                    {jobs.map((job, index) => (
-                        <tr key={index} className="border-b hover:bg-gray-50">
+                    {jobs.map((job) => (
+                        <tr key={job.id} className="border-b hover:bg-gray-50">
                             <td className="py-2 px-4">
-                                <Link href={`/jobs/${index}`} className="text-blue-500 hover:underline">
+                                <Link href={`/jobs/${job.id}`} className="text-blue-500 hover:underline">
                                     {job.position}
                                 </Link>
                             </td>
