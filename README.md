@@ -1,29 +1,32 @@
-# Job Application Tracker
+# Career Relationship Manager
 
 ## Overview
 
-Job Application Tracker is a web application built with Next.js that helps you manage and track your job applications. It allows you to add, view, edit, and delete job applications, making it easier to stay organized during your job search.
- Could you do this in a Google Sheet as well. Sure, but where's the fun in that?
+**Career Relationship Manager** (CRM) is a web application built with Next.js that helps job seekers manage their career journey. This tool is designed to offer much of the functionality of a traditional Customer Relationship Manager (CRM), but with features specifically tailored for job seekers. You can track job applications, networking contacts, interviews, and follow-ups—all in one place, helping you stay organized and proactive in your career growth.
 
-## Features
+Sure, you could use a Google Sheet for this, but **Career Relationship Manager** makes it more fun and efficient.
 
-- View a list of all job applications
-- Add new job applications
-- Edit existing job application details
-- Delete job applications
-- Track important information such as company, position, salary, application status, and important dates
+## Features (some still to be built, this project is a WIP)
+
+- View a list of all job applications and networking connections
+- Add, edit, and delete job applications and contacts
+- Track important information such as company, position, salary, application status, interview schedules, follow-ups, and key dates
+- Keep notes on networking events and conversations
+- Monitor your job search progress and follow-ups
 
 ## Tech Stack
 
-- Next.js 13+ (App Router)
-- React
-- Prisma (ORM)
-- SQLite (Database)
-- Tailwind CSS (Styling)
+- **Next.js 13+ (App Router)** – Fast, modern web framework
+- **React** – Frontend library for building interactive UIs
+- **Prisma** (ORM) – Simplified database management
+- **SQLite** (Database) – Lightweight and simple database solution (for development)
+- **PostgresSQL (Database) - For deployed version
+- **Tailwind CSS** – For easy and customizable styling
 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - Node.js (v14 or later)
 - npm (usually comes with Node.js)
 
@@ -31,45 +34,54 @@ Before you begin, ensure you have the following installed:
 
 Follow these steps to set up the project locally:
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/your-username/job-tracker-nextjs.git
-   cd job-tracker-nextjs
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/career-relationship-manager.git
+   cd career-relationship-manager
    ```
 
-2. Install dependencies:
-   ```
+2. **Install dependencies:**
+
+   ```bash
    npm install
    ```
 
-3. Set up the database:
-    - The project uses SQLite, so no additional database setup is required.
-    - Initialize Prisma and generate the client:
-      ```
-      npx prisma generate
-      ```
-    - Run the initial migration:
-      ```
-      npx prisma migrate dev --name init
-      ```
+3. **Set up the database:**
 
-4. (Optional) Seed the database with sample data:
-   ```
-   npm run db:seed
-   ```
+   The project uses SQLite, so no additional database setup is required.
 
-5. Start the development server:
-   ```
+   - Initialize Prisma and generate the client:
+
+     ```bash
+     npx prisma generate
+     ```
+
+   - Run the initial migration:
+
+     ```bash
+     npx prisma migrate dev --name init
+     ```
+
+   - (Optional) Seed the database with sample data:
+
+     ```bash
+     npm run db:seed
+     ```
+
+4. **Start the development server:**
+
+   ```bash
    npm run dev
    ```
 
-6. Open your browser and navigate to `http://localhost:3000` to view the application.
+5. **Open your browser** and navigate to [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## Usage
 
-- To add a new job application, click on the "Add New Job" button and fill out the form.
-- To view or edit a job application, click on the job title in the list.
-- To delete job applications, select the checkboxes next to the jobs you want to remove and click the "Delete Selected" button.
+- To add a new job application or networking contact, click on the "Add New" button and fill out the form.
+- To view or edit a job application or contact, click on the corresponding entry in the list.
+- To delete applications or contacts, select the checkboxes next to the items you want to remove and click the "Delete Selected" button.
 
 ## Contributing
 
