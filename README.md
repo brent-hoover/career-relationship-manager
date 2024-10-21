@@ -16,18 +16,18 @@ Sure, you could use a Google Sheet for this, but **Career Relationship Manager**
 
 ## Tech Stack
 
-- **Next.js 13+ (App Router)** – Fast, modern web framework
+- **Next.js 14+ (App Router)** – Fast, modern web framework
 - **React** – Frontend library for building interactive UIs
 - **Prisma** (ORM) – Simplified database management
 - **SQLite** (Database) – Lightweight and simple database solution (for development)
-- **PostgresSQL (Database) - For deployed version
+- **PostgresSQL** (Database) – For a deployed version
 - **Tailwind CSS** – For easy and customizable styling
 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
 
-- Node.js (v14 or later)
+- Node.js (v18 or later)
 - npm (usually comes with Node.js)
 
 ## Getting Started
@@ -37,7 +37,7 @@ Follow these steps to set up the project locally:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/career-relationship-manager.git
+   git clone https://github.com/brent-hoover/career-relationship-manager.git
    cd career-relationship-manager
    ```
 
